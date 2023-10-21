@@ -1,6 +1,6 @@
 *{
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 #root{
     width: 100vw;
@@ -55,7 +55,7 @@
     left: 20px;
     bottom: 20px;
 }
-#bottom > .options {
+#bottom > {
     background-color: #d1d1f2;
     padding: 4px 10px;
     border-radius: 5px;
@@ -89,15 +89,34 @@
     cursor: pointer;
    
 }
-.bottom{
+#bottom-1{
+    position:absolute;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 10;
+   bottom: 5px;
 }
-.options{
+.bottom-left{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 10px !important;
+    border: none;
+    background-color: #ececf4;
+    font-size: 20px !important;
+    padding: 3px 4px;
+    border-radius: 5px;
+}
+.right-bottom{
+    margin-right: 35px;
+    gap:5px;
+}
+
+#canvas{
+    /* background-color: aqua; */
+    cursor: crosshair;
 }
 @media (max-width:460px) {
     .btns{
