@@ -14,16 +14,17 @@
       <div id="top">
         <button class="btns material-symbols-outlined" onclick="toggleMenu()">menu</button>
         <div class="options" id="actionbuttons">
-          <button class="btn material-symbols-outlined">lock</button>
+          <button class="btn material-symbols-outlined" id="lockButton">lock</button>
           <button class="btn material-symbols-outlined">pan_tool_alt</button>
           <button class="btn material-symbols-outlined">arrow_selector_tool</button>
           <button class="btn material-symbols-outlined" id="rectangle"   onclick="onActionClick(this)">check_box_outline_blank</button>
           <button class="btn material-symbols-outlined" id="circle"   onclick="onActionClick(this)">circle</button>
-          <button class="btn material-symbols-outlined">trending_flat</button>
+          <button class="btn material-symbols-outlined" id="arrow"  onclick="onActionClick(this)">trending_flat</button>
           <button class="btn material-symbols-outlined"  id="line" onclick="onActionClick(this)">horizontal_rule</button>
           <button class="btn material-symbols-outlined"  id="freehand"   onclick="onActionClick(this)">edit</button>
           <button class="btn material-symbols-outlined">text_format</button>
-          <button class="btn material-symbols-outlined">photo_library</button>
+          <button class="btn material-symbols-outlined"  onclick="document.getElementById('myFile').click();">photo_library <input type="file" id="myFile" name="filename" accept="image/*" style="display: none;">
+          </button>
           <button class="btn material-symbols-outlined" id="eraser"   onclick="onActionClick(this)">ink_eraser</button>
           <button class="btn material-symbols-outlined">steppers</button>
         </div>
@@ -39,13 +40,14 @@
       <div id="bottom">
         <div id="bottom-1">
           <div class="bottom-left">
-            <div>
+            <div class="gap">
             <button class="btn material-symbols-outlined">add</button>
             <button class="btn material-symbols-outlined">money</button>
+            <button class="btn material-symbols-outlined">remove</button>
           </div>
-            <div>
-            <button class="btn material-icons">undo</button>
-          <button class="btn material-icons">redo</button>
+            <div class="margin">
+            <button class="btn material-icons" id="undo">undo</button>
+          <button class="btn material-icons" id="redo">redo</button>
         </div>
         </div>
         <div class="right-bottom">
@@ -76,6 +78,7 @@
     <script src="./script.js"></script>
     <script src="./states.js"></script>
     <script src="./shapes.js"></script>
-    <script src="./undoredo.js"></script>
+    
+    
   </body>
 </html>

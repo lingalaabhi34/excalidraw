@@ -18,7 +18,8 @@ const actions = {
     eraser: false,
     circle: false,
     straightline: false,
-
+    arrow:false
+    
 }
 
 function toggleMenu() {
@@ -51,5 +52,5 @@ function onActionClick(element) {
         // {freehand: "active", rectangle: '', circle: '', eraser: ''}
         actions[btn.id] = isActive;
     })
-    console.log(actions);
+   
 }

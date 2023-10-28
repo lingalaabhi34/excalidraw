@@ -1,16 +1,17 @@
 
-let intialPosition = null;
+let initialPosition = null;
 
 // this arrays will hold the image objects after every mouse up.
 const history = [];
 let historyIndex = -1;
 
+
 function onMouseDown(e) {
-    if (!(actions.circle || actions.rectangle || actions.eraser || actions.freehand || actions.line)) {
+    if (!(actions.circle || actions.rectangle || actions.eraser || actions.freehand || actions.line || actions.arrow)) {
         return;
     }
-    console.log("inside");
-    intialPosition = { x: e.clientX, y: e.clientY };
+    // console.log("inside");
+    initialPosition = { x: e.clientX, y: e.clientY }; // Initialize initialPosition
     startIndex = history.length - 1;
     c.strokeStyle = formState.strokestyle;
     c.lineWidth = formState.strokewidth;
@@ -39,10 +40,11 @@ function onMouseMove(e) {
         resetToOriginalImage();
         drawLine(currentPosition);
     }
-    // else if(actions.straightline){
-    //     resetToOriginalImage();
-    //     drawatraightline(currentPosition);
-    // }
+    else if(actions.arrow){
+        resetToOriginalImage();
+        arrow(currentPosition);
+    }
+   
 }
 
 function onMouseUp() {
@@ -68,13 +70,13 @@ function resetToOriginalImage() {
 
 function drawFreeHand(currentPosition) {
     c.beginPath();
-    c.moveTo(intialPosition.x, intialPosition.y);
+    c.moveTo(initialPosition.x, initialPosition.y);
     c.lineTo(currentPosition.x, currentPosition.y);
     c.lineCap = "round";
     c.lineJoin = "round";
     c.stroke();
     c.closePath();
-    intialPosition = currentPosition;
+    initialPosition = currentPosition;
 }
 
 function handleErase(currentPosition) {
@@ -84,25 +86,54 @@ function handleErase(currentPosition) {
 function drawCircle(currentPosition) {
     c.beginPath();
     const radius = Math.sqrt(
-        (currentPosition.x - intialPosition.x) ** 2 +
-        (currentPosition.y - intialPosition.y) ** 2
+        (currentPosition.x - initialPosition.x) ** 2 +
+        (currentPosition.y - initialPosition.y) ** 2
     );
 
-    c.arc(intialPosition.x, intialPosition.y, radius, 0, 2 * Math.PI, true);
+    c.arc(initialPosition.x, initialPosition.y, radius, 0, 2 * Math.PI, true);
     c.stroke();
 }
 
 function drawRectangle(currentPosition) {
     c.beginPath();
     // draw rectangle
-    let width = currentPosition.x - intialPosition.x;
-    let height = currentPosition.y - intialPosition.y;
-    c.strokeRect(intialPosition.x, intialPosition.y, width, height);
+    let width = currentPosition.x - initialPosition.x;
+    let height = currentPosition.y - initialPosition.y;
+    c.strokeRect(initialPosition.x, initialPosition.y, width, height);
 }
 
 function drawLine(currentPosition) {
     c.beginPath();
-    c.moveTo(intialPosition.x, intialPosition.y);
+    c.moveTo(initialPosition.x, initialPosition.y);
     c.lineTo(currentPosition.x, currentPosition.y);
     c.stroke();
 }
+
+function arrow(currentPosition) {
+    c.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+    // Ensure that initialPosition is defined
+    if (initialPosition) {
+        // Draw a line from initialPosition to currentPosition
+        c.beginPath();
+        c.moveTo(initialPosition.x, initialPosition.y);
+        c.lineTo(currentPosition.x, currentPosition.y);
+        c.stroke();
+
+        // Calculate the arrowhead coordinates
+        const arrowSize = 10; // Adjust the size of the arrowhead as needed
+        const angle = Math.atan2(currentPosition.y - initialPosition.y, currentPosition.x - initialPosition.x);
+        const arrowX = currentPosition.x - arrowSize * Math.cos(angle);
+        const arrowY = currentPosition.y - arrowSize * Math.sin(angle);
+
+        // Draw the forward edge shape
+        c.beginPath();
+        c.moveTo(arrowX, arrowY);
+        c.lineTo(arrowX + arrowSize * Math.cos(angle - Math.PI / 4), arrowY + arrowSize * Math.sin(angle - Math.PI / 4));
+        c.lineTo(arrowX + arrowSize * Math.cos(angle + Math.PI / 4), arrowY + arrowSize * Math.sin(angle + Math.PI / 4));
+        c.closePath();
+        c.fill();
+    }
+}
+
+
