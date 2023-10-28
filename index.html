@@ -12,19 +12,19 @@
   <body>
     <div id="root">
       <div id="top">
-        <button class="btns material-symbols-outlined">menu</button>
-        <div class="options">
+        <button class="btns material-symbols-outlined" onclick="toggleMenu()">menu</button>
+        <div class="options" id="actionbuttons">
           <button class="btn material-symbols-outlined">lock</button>
           <button class="btn material-symbols-outlined">pan_tool_alt</button>
           <button class="btn material-symbols-outlined">arrow_selector_tool</button>
-          <button class="btn material-symbols-outlined">check_box_outline_blank</button>
-          <button class="btn material-symbols-outlined">circle</button>
+          <button class="btn material-symbols-outlined" id="rectangle"   onclick="onActionClick(this)">check_box_outline_blank</button>
+          <button class="btn material-symbols-outlined" id="circle"   onclick="onActionClick(this)">circle</button>
           <button class="btn material-symbols-outlined">trending_flat</button>
-          <button class="btn material-symbols-outlined">horizontal_rule</button>
-          <button class="btn material-symbols-outlined">edit</button>
+          <button class="btn material-symbols-outlined"  id="line" onclick="onActionClick(this)">horizontal_rule</button>
+          <button class="btn material-symbols-outlined"  id="freehand"   onclick="onActionClick(this)">edit</button>
           <button class="btn material-symbols-outlined">text_format</button>
           <button class="btn material-symbols-outlined">photo_library</button>
-          <button class="btn material-symbols-outlined">ink_eraser</button>
+          <button class="btn material-symbols-outlined" id="eraser"   onclick="onActionClick(this)">ink_eraser</button>
           <button class="btn material-symbols-outlined">steppers</button>
         </div>
         <div class="right">
@@ -55,7 +55,27 @@
       </div>
       </div>
     </div>
-    
+    <div class="form hide">
+      <label for="strokewidth">Stroke Width</label>
+      <input
+        type="range"
+        id="strokewidth"
+        name="strokewidth"
+        min="3"
+        max="10"
+        oninput="onInput(this)"
+      />
+      <label for="strokestyle">Stroke Color</label>
+      <input
+        type="color"
+        name="strokestyle"
+        id="strokestyle"
+        oninput="onInput(this)"
+      />
+    </div>
     <script src="./script.js"></script>
+    <script src="./states.js"></script>
+    <script src="./shapes.js"></script>
+    <script src="./undoredo.js"></script>
   </body>
 </html>
